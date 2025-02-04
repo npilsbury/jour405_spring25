@@ -6,14 +6,24 @@ Follow along with the demo to learn how to calculate percentage change using R a
 
 
 ### Task 1: Load the tidyverse
+```{r}
+library(tidyverse)
+
+```
 
 
 
 ### Task 2: Load the UMD Fees dataset from https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/umd_fees.csv
+```{r}
+umd.fees <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/umd_fees.csv")
+```
 
 
 
 ### Task 3: Calculate the percentage change in each category between Fall 2024 and Fall 2021 using `mutate()`
+```{r}
+umd.fees_pct <- umd.fees %>% mutate(pct_change = (`Fall 2024`-`Fall 2021`)/`Fall 2021` * 100)
+```
 
 
 
@@ -21,6 +31,7 @@ Follow along with the demo to learn how to calculate percentage change using R a
 
 Write a few sentences about what you found in the data. What's the story here?
 
+If I were to write a story with this, I would write about how there has been a 150% fee increase in the Student Sustainability fee over a 3 year period. This begs the question of how much more will UMD increase the fees, and when will people begin to get angry about the gradual change over time. This fee may often be overlooked, as it is still the smallest fee, but it is still the fee with the largest percent change. It may also be notable that the athletics fee has not increased, but this may be subject to change due to the payment athletes will be receiving, as we discussed in class. It is also important to discuss that the shuttle bus fee has increased by almost 100$, or about 40%, and what changes were made to warrant that fee. 
 
 
 
