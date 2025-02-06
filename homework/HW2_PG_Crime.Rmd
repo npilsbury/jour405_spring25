@@ -9,7 +9,8 @@ In this assignment, we will be working with a dataset reporting the number of cr
 You will need to load the tidyverse library
 
 ```{r}
-
+library(tidyverse)
+library(dbplyr)
 ```
 
 Then you'll load the data from the web. The URL for the data is: https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/pg_crime_totals_2024.csv. You will create a dataframe called `pg_crime` that contains the data from this URL.
@@ -17,33 +18,36 @@ Then you'll load the data from the web. The URL for the data is: https://raw.git
 ### Task 2: Load the Data and Describe It
 
 ```{r}
+pg_crime <- read.csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/pg_crime_totals_2024.csv")
 ```
 ### Task 3: Describe the Data
 
 You should examine that dataframe carefully by clicking on it in the Environment tab in RStudio. Write a couple of sentences describing the categories of incidents. From a reporting standpoint, are any of the categories more important than others? Why or why not? Do any of them make the job of summarizing the data more difficult? Why or why not?
 
-ANSWER HERE
-
+I think that the assault shooting category is important, as it is a severe crime and it also has an interesting trend, with only 5 accounts in January, and 21 accounts in July and August. A good story would consist of this data and any factors that may contribute to the uptick in these kinds of assaults, such as regulation or social changes. Many of the categories have stayed fairly consistent, meaning that there are no clear outliers, and it may be interesting why those numbers have stayed the same and why any policies put in place to combat them are not effective. Homicide and crimes considered more dangerous may be considered more important, but ultimately, I believe any crime trends are newsworthy and warrant a trend explanation.
+The assualt shooting category may make it difficult to summarize the data due to the large variety in data, so a report would not be able to say that crime has stayed fairly consistent overall.
 ### Task 4: Calculating Averages
 
 Calculate the total number of incidents per month for each category using `mutate()`, calling the new column `total_incidents`. Then calculate the average number of incidents per month for each category of crime, calling the new column `average_incidents`. Assign the result to a new dataframe called `pg_crime_averages`.
 
 ```{r}
-
+total_incidents <- pg_crime %>% mutate(`Jan`+`Feb`+`Mar`+`Apr`+`May`+`Jun`+`Jul`+`Aug`+`Sep`+`Oct`+`Nov`+`Dec`)
+average_incidents <-total_incidents %>% mutate((`Jan`+`Feb`+`Mar`+`Apr`+`May`+`Jun`+`Jul`+`Aug`+`Sep`+`Oct`+`Nov`+`Dec`)/12)
+pg_crime_averages <-average_incidents
 ```
 
 ### Task 5: Describe the Averages
 
 Examine the new dataframe, `pg_crime_averages`, by clicking on it in the Environment tab in RStudio. Write a couple of sentences describing the average number of incidents per month for each category. Which categories have the highest average number of incidents per month? Which have the lowest? What does this tell you about the pattern of crime in Prince George's County? Are there categories that you have questions about? Why or why not?
 
-ANSWER HERE
-
+The categories with the highest averages are Accident, Auto Stolen, Theft from Auto and Accident with Impound. The categories with the lowest averages are Homicide, B&E Other, Sex Offense and Assault Weapon. This means that the highest amount of incidents have to do with accidents and cars, and there are less serious incidents, such as homicide and sex offenses. I have questions about the auto stolen and the theft from auto, as I feel like these incidents are not as common as the data explains. I have questions about what models of cars they are taking the most of, if the victims were locking their cars, if there is evidence of one suspect or multiple, and if the methods are consistent throughout incidents.I have questions about other data points, but the trend of car incidents stuck out to me. 
 
 ### Task 6: Testing a Theory
 
 One theory about crime is that it is more likely to occur in the summer months. Test this theory by creating three new columns using `mutate()` that calculate the percentage change compared to the average for each category of crime for the months of June, July, and August. Call the new columns `june_change`, `july_change`, and `august_change`. Assign the result to a new dataframe called `summer_crime_averages`.
 
 ```{r}
+june_change <- pg_crime_averages%>%mutate(((`Jun`- pg_crime_averages)/pg_crime_averages)*100)
 ```
 
 ### Task 7: Describe the Summer Crime Averages
