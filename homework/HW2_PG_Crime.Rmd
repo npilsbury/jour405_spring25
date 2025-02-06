@@ -10,7 +10,7 @@ You will need to load the tidyverse library
 
 ```{r}
 library(tidyverse)
-library(dbplyr)
+library(dplyr)
 ```
 
 Then you'll load the data from the web. The URL for the data is: https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/pg_crime_totals_2024.csv. You will create a dataframe called `pg_crime` that contains the data from this URL.
@@ -47,20 +47,22 @@ The categories with the highest averages are Accident, Auto Stolen, Theft from A
 One theory about crime is that it is more likely to occur in the summer months. Test this theory by creating three new columns using `mutate()` that calculate the percentage change compared to the average for each category of crime for the months of June, July, and August. Call the new columns `june_change`, `july_change`, and `august_change`. Assign the result to a new dataframe called `summer_crime_averages`.
 
 ```{r}
-june_change <- pg_crime_averages%>%mutate(((`Jun`- pg_crime_averages)/pg_crime_averages)*100)
+june_change <- pg_crime_averages%>%mutate(june change=((`Jun`-pg_crime_averages)/pg_crime_averages)*100,)
 ```
 
 ### Task 7: Describe the Summer Crime Averages
 
 Look at the `summer_crime_averages` dataframe by clicking on it in the Environment tab in RStudio. Write a couple of sentences describing the percentage change in the average number of incidents per month for each category of crime for the months of June, July, and August. Do you see any patterns? What does this tell you about the theory that crime is more likely to occur in the summer months?
 
-ANSWER HERE
+I could not figure out the code for the previous answer, but based on my observations of the data, crime does not seem that much more likely to occur in the summer. There are some categories that had crime in higher numbers during the summer months, such as "Auto Stolen," but most of the categories had about the same or only slightly higher levels. I do not think that this theory can be generalized, as it may depend on the location and the type of crime someone is discussing. 
 
 ### Task 8: What's the Story?
 
 Write up a lede and nutgraf of a story focused on the crime data in Prince George's County. It could be from any of the dataframes you've created in this assignment. The lede should be a single sentence that summarizes the most important information in the data. The nutgraf should be a paragraph that provides more context and explains why the data is important.
 
-ANSWER HERE
+Assault shootings at an extreme low in January in Prince George's County, compared numbers more than four times as large in July and August. 
+
+January had five total assault shootings in the county, while July and August each had 21 incidents. An average of about 16 assault shootings take place each month in Prince George's County, making five a notably low number for the month of January. There were a total of 188 assualt shootings in the year. 
 
 ### Task 9: Save Your Work and Put it on GitHub
 
