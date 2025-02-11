@@ -59,3 +59,19 @@ While Baltimore City saw a 69% decrease in property crime in 2020 and Oakland sa
 ### Task 9: Save Your Work and Put it on GitHub
 
 Save this notebook, then commit it to your local repository. Push the changes to your GitHub repository and submit the URL for this file in ELMS.
+
+### Task 10: HW 5
+
+```{r}
+md_cities_percentiles <- md_cities_rates %>%  mutate(percentile = ntile(violent_rate_2020,100))
+```
+10 cities are above the 90th percentile.
+```{r}
+md_cities_rates %>% summarize(IQR(violent_rate_2020))
+```
+
+This does not change my best story idea, but I do think it would be an interesting story to see what cities are in the top percentiles and the lowest percentiles, and how their law enforcement procedures and educational structures differ. This could be a longer, more in depth story that cites specific examples and mitigation solutions.
+Despite this, I think my story idea from before was better, as it grabs the attention of the reader more and has more room for specific statistics and information.
+
+
+
