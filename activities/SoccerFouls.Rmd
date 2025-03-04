@@ -37,7 +37,8 @@ matches %>% summarize(correlation = cor(fouls, goal_dif, meth="pearson"))
 ```{r}
 matches %>% 
     ggplot()+
-    geom_point(aes(x=goal_dif, y=fouls))
+    geom_point(aes(x=goal_dif, y=fouls))+
+    geom_smooth(aes(x=goal_dif, y=fouls), method="lm")
 ```
 
 
