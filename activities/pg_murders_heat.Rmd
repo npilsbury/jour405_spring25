@@ -1,0 +1,56 @@
+---
+title: "PG Murders and Heat"
+---
+
+Remember how we talked about people killing each other more when it's hot outside? Let's explore that relationship using homicide and temperature data from Prince George's County. You'll load the data, perform some basic statistical analysis, and create a scatterplot to explore the relationship. Follow the steps below to complete the assignment.
+
+### Task 1: Load the tidyverse
+
+```{r}
+library(tidyverse)
+```
+
+
+### Task 2: Load the dataset from [https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/pg_murder_temps.csv](https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/pg_murder_temps.csv)
+
+```{r}
+data <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/pg_murder_temps.csv")
+```
+
+
+### Task 3: Use `summarize()` and the `cor()` function to calculate the correlation between murders and temperature, using the pearson method.
+
+```{r}
+data %>% summarize(correlation = cor(murders, temperature, method="pearson"))
+```
+
+
+
+### Task 4: Create a scatterplot of murders and temperature, using `geom_point()`. Your aes() will have temperatures on the x axis, murders on the y axis and add a label for the month (so label=month inside the aes()).
+
+```{r}
+data %>% 
+  ggplot()+
+  geom_point(aes(y=murders, x=temperature, label="month"))+
+  geom_smooth(aes(x=temperature, y=murders), method="lm")
+```
+
+
+
+### Task 5: Add labels to the scatterplot using geom_text(). Inside geom_text() put the same aes() as geom_point in Task 4, then after the aes() add size = 5.
+
+```{r}
+data %>% 
+  ggplot()+
+  geom_point(aes(y=murders, x=temperature))+
+  geom_smooth(aes(x=temperature, y=murders), method="lm")+
+  geom_text(aes(y=murders, x=temperature, label=month),size=5)
+```
+
+
+### Task 6: Describe the results of both the correlation calculation and the scatterplot.
+
+The results show a positive correlation between temperature and murders. The correltion coefficinet is about 0.6 and the line of best fit slopes upwards, further proving the positive correlation. The warmer months are also higher on the scatterplot, meaning they have a higher amount of murders.
+
+
+When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
