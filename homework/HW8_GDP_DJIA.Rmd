@@ -13,6 +13,7 @@ Your task in this assignment will be to examine the relationship between those t
 ### Task 1: Load the tidyverse
 
 ```{r}
+library(tidyverse)
 ```
 
 ### Task 2: Load the GDP and DJIA data
@@ -20,6 +21,7 @@ Your task in this assignment will be to examine the relationship between those t
 Load the GDP data from https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/gdp_djia.csv
 
 ```{r}
+data <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/gdp_djia.csv")
 ```
 
 ### Task 3: Calculate the correlation coefficient
@@ -27,6 +29,7 @@ Load the GDP data from https://raw.githubusercontent.com/dwillis/jour405/refs/he
 Use the `cor()` function to calculate the correlation coefficient between the DJIA and GDP.
 
 ```{r}
+data %>% summarize(correlation = cor(DJIA, GDP, method="pearson"))
 ```
 
 ### Task 4: Create a scatterplot
@@ -34,12 +37,19 @@ Use the `cor()` function to calculate the correlation coefficient between the DJ
 Use the `ggplot()` function to create a scatterplot of the DJIA and GDP. Be sure to label your axes and add a title.
 
 ```{r}
+data %>% 
+  ggplot()+
+  geom_point(aes(x=DJIA, y=GDP))+
+  labs(title="Correlation of DJIA and GDP")+
+  geom_smooth(aes(x=DJIA, y=GDP, method="lm"))+
+  geom_text(aes(x=DJIA, y=GDP, label= Quarter, size=5,))
 ```
 
 ### Task 5: Describe our results
 
 Write a few sentences about the relationship between the DJIA and GDP. Is there a strong correlation between the two variables? What does the scatterplot show?
 
+The data shows a strong, positive correlation between the two variables. The correlation coefficient was 0.95, which was very strong since it is only 0.05 away from 1. The data points are also mainly clustered around the line of best fit on the scatterplot, which shows most of the data's close proximity to the line of best fit. The scatterplot also shows a positive line, since it is sloping upward.
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
 
