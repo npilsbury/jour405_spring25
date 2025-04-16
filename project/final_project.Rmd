@@ -1,0 +1,36 @@
+---
+title: "final_project"
+output: html_document
+---
+Project Details
+
+Part 1: Comparing Big 10 Teams Changes Carbon Emissions 
+- Individual teams increase/decrease of carbon emissions
+- Comparing individual teams for 2023 and 2024
+- Comparing individual teams changes from 2023 to 2024
+
+Part 2: Big 10 Teams Carbon Emissions and Amount of Wins
+- Are carbon emissions and the amount of wins a team have related?
+- Do the teams that emit the most carbon emissions have the most wins? The least wins?
+
+Data
+
+Carbon Emissions: https://cnsmaryland.org/2024/12/11/big-ten-football-travel-carbon-emissions-expansion/ (also in project folder in CSV format)
+
+Wins:
+2024: https://bigten.org/fb/standings/2024/ (pdf in folder)
+2023: https://bigten.org/fb/standings/2023/ (pdf in folder)
+UCLA 2023:https://www.espn.com/college-football/team/schedule/_/id/26/season/2023
+USC 2023: https://www.espn.com/college-football/team/schedule/_/name/usc/season/2023 
+Oregon 2023: https://www.espn.com/college-football/team/schedule/_/id/2483/season/2023 
+Washington 2023: https://www.espn.com/college-football/team/schedule/_/id/264/season/2023 
+Compiled 2023 data to account for addition of 4 teams: https://docs.google.com/spreadsheets/d/1F5T3dpv0nkBDtk-4UeIJzp1RGHnu8ow7pXMRG40-Z0w/edit?usp=sharing (also pdf in folder)
+
+Assignment Questions
+
+The data is from 2023 and 2024. It focuses on regular season conference games for Big 10 football teams and their carbon emissions. The Big 10 added four teams for the 2024 season, all of which are on the West Coast. 
+
+Both columns in the carbon emissions dataset are important. As for the wins data, only the conference game records are important, as they show how many wins each team had. 
+
+As of now, the only question I have is how to import the data I have. I have both the CSV and the google sheet from 2023 pdf in the folder, but I am not sure how to load it. 
+
