@@ -17,9 +17,18 @@ View(Wins)
 ```
 
 Types of Tests to Run
+
 ANOVA: Used to test if there are real patterns in the data, or if it is just coincidental. Most of the teams emitted more carbon from travel during 2024, and 11 of the teams did worse, or had less wins in the 2024 season. ANOVA can test if these two factors are related or if it just ended up that way. 
 
 Z-Score: Calculate the number of standard deviations something is from the mean. I think that this could be used for both the emissions data and the wins data. I can calculate the average amount of carbon emissions per year, as well as the average increase. I can then use z-scores to see if any university had an unusual change in the amount of emissions. I can do something similar for wins. 
+
+Tukey's Test (?): This test might be useful to see which of the two colleges differ the most for the increase/decrease of both emissions and wins.
+
+Other Analyses
+
+I think that making charts and graphs to visualize the data would be helpful for comparing. I think a bar chart would be best.
+
+Past Work
 
 Project Details
 
