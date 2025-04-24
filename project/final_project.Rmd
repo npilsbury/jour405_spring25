@@ -2,6 +2,25 @@
 title: "final_project"
 output: html_document
 ---
+Week 12 Work
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+Emissions <- read_csv("https://raw.githubusercontent.com/npilsbury/jour405_spring25/refs/heads/main/project/Emissions.csv")
+View(Emissions)
+
+Wins <- read_csv("https://raw.githubusercontent.com/npilsbury/jour405_spring25/refs/heads/main/project/Project%20Data%20-%20Sheet1.csv")
+View(Wins)
+```
+
+Types of Tests to Run
+ANOVA: Used to test if there are real patterns in the data, or if it is just coincidental. Most of the teams emitted more carbon from travel during 2024, and 11 of the teams did worse, or had less wins in the 2024 season. ANOVA can test if these two factors are related or if it just ended up that way. 
+
+Z-Score: Calculate the number of standard deviations something is from the mean. I think that this could be used for both the emissions data and the wins data. I can calculate the average amount of carbon emissions per year, as well as the average increase. I can then use z-scores to see if any university had an unusual change in the amount of emissions. I can do something similar for wins. 
+
 Project Details
 
 Part 1: Comparing Big 10 Teams Changes Carbon Emissions 
@@ -32,5 +51,4 @@ The data is from 2023 and 2024. It focuses on regular season conference games fo
 
 Both columns in the carbon emissions dataset are important. As for the wins data, only the conference game records are important, as they show how many wins each team had. 
 
-As of now, the only question I have is how to import the data I have. I have both the CSV and the google sheet from 2023 pdf in the folder, but I am not sure how to load it. 
-
+As of now, the only question I have is how to import the data I have. I have both the CSV and the google sheet from 2023 pdf in the folder, but I am not sure how to load it.
