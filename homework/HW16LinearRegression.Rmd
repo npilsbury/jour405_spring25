@@ -1,0 +1,93 @@
+---
+title: "Identifying Schools with Biggest Differences in Math Test Scores, Part 2"
+author: "Nicole Pilsbury"
+---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+options(scipen = 999)
+```
+
+### Introduction
+
+We'll do what we did in class, but with a twist: instead of Montgomery County, Pa., you'll be working with data from Montgomery County, Md. Same basic idea, though: linear regression looking at free and reduced-price meals and math test scores.
+
+Just as in the exercise, you will create a scatterplot to visualize the relationship between the FARMS (Free and Reduced-price Meal System) percentage and the percentage of students who met or exceeded math expectations. You'll then use linear regression to identify the schools that show the biggest differences between their actual and expected math test scores and evaluate the results of your model.
+
+### Loading the Data
+
+First, let's load the data into a data frame using the read_csv() function from the tidyverse library.
+
+```{r}
+schools <- read_csv("https://raw.githubusercontent.com/dwillis/jour405_files/refs/heads/main/montgomery_md.csv")
+```
+### Task: Create a Scatterplot and Describe the Results (5 points)
+
+First, let's create a scatterplot to visualize the relationship between the FARMS percentage and the percentage of students who met or exceeded math expectations. We'll use ggplot2 to create the plot and add a linear regression line.
+
+```{r}
+schools |>
+  ggplot(aes(x = `FARMS Pct`, y = `% Met or Exceeded Math Expectations`)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "FARMS Percentage", y = "% Met or Exceeded Math Expectations", title = "Scatterplot of Math Expectations vs FARMS Percentage")
+```
+Based on what you see here, what's the relationship between FARMS percentage and math test scores? Compare this scatterplot to the one you made in the class activity.
+
+Based on the scatterplot, there is a moderately strong negative correlation between math test scores and FARMS percentage. The scatterplot in the class activity, which compared Montgomery County, PA to FARMS percentage, showed a positive correlation. The points on the class activity scatterplot also strayed farther from the line of best fit, meaning it did not account for as many points as this scatterplot does. This scatterplot has some clusters around the line of best fit and does not have too many outliers. 
+
+
+### Task: Linear Regression Model (7 points)
+
+Next, you'll perform a linear regression analysis using the lm() function. We'll set the percentage of students who met or exceeded math expectations as the dependent variable, and the FARMS percentage as the independent variable. In other words, if we know the FARMS percentage for a school, how reliably can we predict its math score?
+
+```{r}
+model <- lm(`% Met or Exceeded Math Expectations` ~ `FARMS Pct`, data = schools)
+
+summary(model)
+```
+
+Provide the model's output for the three statistics mentioned in the class activity.
+
+Adjusted R-squared: 0.6734
+P-value: less than 0.00000000000000022
+Intercept: 68.04878
+FARMS Pct Coefficient: -0.59511
+
+Based on what you've learned so far, what does it tell us about the nature of the relationship between FARMS percentage and math scores? Is this model worth exploring further? Why or why not?
+
+Based on this data, only 0.67% of the math scores can be explained by the FARMS percentage. The p-value is significant since it is below 0.05. Hypothetically, the intercept and coefficients could be used to caculate a school's predicted math score or predicted FARMs percentage. In this case, if the school had 0% students on FARMS, 68% of their students would meet or exceed math test expectations. 
+I think that the adjusted R-squared value shows that this model is not worth explainign further because less then 1% of the data can be explained by the model, or has a relationship where the independent variable affects the dependent. Although the p-value is significant, the lack of significnace in the R-value makes this not worht exploring. 
+
+### Task: Identifying Schools with Biggest Residuals (3 points)
+
+Let's calculate and examine the residuals next. 
+
+```{r}
+schools$predicted <- predict(model)
+
+# Calculate the residuals
+schools <- schools |> 
+  mutate(residual = `% Met or Exceeded Math Expectations` - predicted)
+
+# Sort the data frame by the absolute value of the residuals in descending order
+schools <- schools |>
+  mutate(abs_residual = abs(residual)) |>
+  arrange(desc(abs_residual))
+
+```
+
+Look at the absolute values of the residuals; what are the largest differences between the predicted result and the actual math scores? Pick two schools with the largest residuals. Find the zip codes where they are located and using the CensusReporter.org website, describe the most interesting demographic data from each zip code.
+
+The two schools with the largest residuals are Fox Chapel Elementary, with a residual 30, and Broad Acres Elementary, with a residual of 28. Both residuals were positive, meaning the graph under predicted the math score. 
+I was surprised that in Silver Spring zip code 20903, where Broad Acres Elementary is located, only 65.8% of the people are high school graduates or higher. Additionally, only nearly a quarter of the population of this area has a bachelor's degree or higher. 
+As for Germantown 20876, where Fox Chapel Elementary is located, nearly 36% of the population was not born in America. According to the site, this 1.5 times as high as the percentage in the Metropolitan area, and nearly double the rate for Maryland. 
+
+## Task: Evaluate the model (5 points)
+
+Describe what conclusions you'd draw from this model's results and how it would influence a story pitch about the school board member and math scores.
+
+The conclusions I would draw from this model are similar to those from the in class activity- there is not a relationship between the two variables, and the math scores cannot be explained by the FARMS percentage. 
+
+Pitch: I would pitch a story about how FARMS percentages do not correlate with the percent of students who exceed or meet expectations on math scores. I would include how only 0.67% of the data can be accounted for based on the model, as it proves why there is not a relationship between the two variables. This would support the lack of relationship in the model that was made for Montgomery, PA.
