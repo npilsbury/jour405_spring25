@@ -2,6 +2,65 @@
 title: "final_project"
 output: html_document
 ---
+Week 13 works (Final project: trials, errors and lessons)
+```{r}
+library(tidyverse)
+library(kableExtra)
+
+emissions <- read_csv("https://raw.githubusercontent.com/npilsbury/jour405_spring25/refs/heads/main/project/Emissions.csv")
+
+wins <- read_csv("https://raw.githubusercontent.com/npilsbury/jour405_spring25/refs/heads/main/project/Project%20Data%20-%20Sheet1.csv")
+
+#Summary
+
+emissions_summary <- emissions %>% mutate(mean_emissions2023 = mean(Emissions2023), median_emissions2023= median(Emissions2023), mean_emissions2024= mean(Emissions2024), median_emissions2024 = median(Emissions2024), sd_emissions2023 = sd(Emissions2023), sd_emissions2024 = sd(Emissions2024))
+
+wins_summary <- wins %>% mutate(mean_wins2023= mean(Wins2023), mean_wins2024 = mean(Wins2024), median_wins2023 = mean(Wins2023), median_wins2024 = median(Wins2024), sd_wins2023 = sd(Wins2023), sd_Wins2024 = sd(Wins2024))
+
+
+```
+```{r}
+#ANOVA
+
+anova_result <- aov(Wins2023 ~ Wins2024, data= wins)
+summary(anova_result)
+
+anova_result <- aov(Emissions2023 ~ Emissions2024, data= emissions)
+summary(anova_result)
+```
+```{r}
+#Z-Score
+emissions_summary <- emissions_summary %>% mutate(z_score = (Emissions2023 - mean_emissions2023) / sd_emissions2023)
+
+emissions_summary |>
+  select(Team, Emissions2023, z_score) |>
+  head(10) |>
+  kable(digits = 2)
+
+emissions_summary <- emissions_summary %>% mutate(z_score = (Emissions2024 - mean_emissions2024) / sd_emissions2024)
+
+emissions_summary |>
+  select(Team, Emissions2024, z_score) |>
+  head(10) |>
+  kable(digits = 2)
+
+wins_summary <- wins_summary %>% mutate(z_score = (Wins2023 - mean_wins2023) / sd_wins2023)
+
+wins_summary |>
+  select(Team, Wins2023, z_score) |>
+  head(10) |>
+  kable(digits = 2)
+
+wins_summary <- wins_summary %>% mutate(z_score = (Wins2024 - mean_wins2024) / sd_Wins2024)
+
+wins_summary |>
+  select(Team, Wins2024, z_score) |>
+  head(10) |>
+  kable(digits = 2)
+
+```
+
+
 Week 12 Work
 
 ```{r}
