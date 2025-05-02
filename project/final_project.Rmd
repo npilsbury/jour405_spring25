@@ -7,6 +7,8 @@ Week 13 works (Final project: trials, errors and lessons)
 Questions: 
 I couldn't figure out what I was doing wrong with the T test. I tried to copy from the ANOVA activity, but it kept saying "no factors in the fitted model."
 
+I had the z-score code working but I went do write down my analysis and now it doesn't work? Confused.
+
 How do I do a "correlation test" as mentioned in your feedback?
 ```{r}
 library(tidyverse)
@@ -33,9 +35,10 @@ summary(anova_result_wins)
 anova_result_emissions <- aov(Emissions2023 ~ Emissions2024, data= emissions)
 summary(anova_result_emissions)
 ```
+Since the F-value is very low, I think that this means that the data is not statistically significant and there is variation within the individual group as opposed to between the two years. Compared to how large the numbers are, the F-value is very small.
 ```{r}
 #Z-Score
-emissions_summary <- emissions_summary %>% mutate(z_score = (Emissions2023 - mean_emissions2023) / sd_emissions2023)
+emissions_summary <- emissions_summary |> mutate(z_score = (Emissions2023 - mean_emissions2023) / sd_emissions2023)
 
 emissions_summary |>
   select(Team, Emissions2023, z_score) |>
@@ -64,6 +67,7 @@ wins_summary |>
   kable(digits = 2)
 
 ```
+The largest Z-score is Washington's 2024 emissions, which is 2.20. Most of the other z-scores were around 1.5 or lower, meaning that most of the data is similiar and none of it deviates too far from the mean. This means that there is not too much variation in the data. 
 ```{r}
 #T test (i do not know what to do)
 tukey_result_wins <- TukeyHSD(anova_result_wins)
@@ -92,7 +96,8 @@ model2024 <- lm(`Wins2024` ~ `Emissions2024`, data = data)
 summary(model2024)
 
 ```
-
+The adjusted R-squared is very low for both scatterplots, meaning that the model does not account for a large part of the data. This also means that the dependent variable is generally not affected by the independent variable. 
+The p-value for the 2024 plot is not statistically significant, as it has a value of about 0.47. On the other hand, the p-value for the 2023 plot is statistically significant, as it is about 0.02. I still do not think this means much since the adjusted r-squared is so low. 
 
 Week 12 Work
 
